@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="size"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/pizza_size_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_full"
+        android:elevation="3dp">
+
+        <TextView
+            android:layout_width="87dp"
+            android:layout_height="82dp"
+            android:gravity="center"
+            android:text="@{size}"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="30sp" />
+    </RelativeLayout>
+</layout>

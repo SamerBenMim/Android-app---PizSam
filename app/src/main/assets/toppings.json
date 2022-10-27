@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Pepperoni",
+    "price": 2,
+    "imageSrc": "pepperoni"
+  },
+  {
+    "name": "Sausage",
+    "price": 2,
+    "imageSrc": "sausage"
+  },
+  {
+    "name": "Mushrooms",
+    "price": 1,
+    "imageSrc": "mushrooms"
+  },
+  {
+    "name": "Onions",
+    "price": 1,
+    "imageSrc": "onions"
+  },
+  {
+    "name": "Green Peppers",
+    "price": 1,
+    "imageSrc": "green_peppers"
+  }
+]
