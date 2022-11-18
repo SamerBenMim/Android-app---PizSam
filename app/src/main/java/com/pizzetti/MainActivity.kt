@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         initializeToppings()
         binding.confirm.setOnClickListener {
             handlePlaceOrder()
+
         }
     }
 
@@ -59,18 +60,13 @@ class MainActivity : AppCompatActivity() {
         } else if (selectedSize == -1) {
             Toast.makeText(this, "Please select a size", Toast.LENGTH_SHORT).show()
         } else {
-            // Send sms
-            intent = Intent(Intent.ACTION_VIEW)
-            intent.putExtra(
-                "sms_body",
-                "Hello, I would like to order a pizza with the following toppings: ${selectedToppings.map { it.name }}. "
-                    .replace("[", "").replace("]", "") +
-                    "My name is $firstName $lastName and I live at $address. The total should price is $$price."
-            )
-            intent.type = "vnd.android-dir/mms-sms"
-            startActivity(intent)
+            val recipient = "benmimsamer15@gmail.com"
+            val subject = "order Pizza"
+            val message = "pizza"
+            sendEmail(recipient, subject, message)
         }
     }
+
 
 //    @SuppressLint("SetTextI18n")
 //    private fun setPrice(price: Int) {
@@ -177,5 +173,33 @@ class MainActivity : AppCompatActivity() {
                 toppingBinding.remove.alpha = disabledAlpha
             }
         }
+    }
+    public fun sendEmail(recipient: String, subject: String, message: String) {
+        /*ACTION_SEND action to launch an email client installed on your Android device.*/
+        val mIntent = Intent(Intent.ACTION_SEND)
+        /*To send an email you need to specify mailto: as URI using setData() method
+        and data type will be to text/plain using setType() method*/
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        // put recipient email in intent
+        /* recipient is put as array because you may wanna send email to multiple emails
+           so enter comma(,) separated emails, it will be stored in array*/
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+        //put the Subject in the intent
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        //put the message in the intent
+        mIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+
+        try {
+            //start email intent
+            startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
+        }
+        catch (e: Exception){
+            //if any thing goes wrong for example no email client application or any exception
+            //get and show exception message
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+
     }
 }
